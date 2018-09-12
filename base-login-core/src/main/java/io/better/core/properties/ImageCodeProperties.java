@@ -18,15 +18,20 @@ public class ImageCodeProperties {
     /**
      * 图片的高
      */
-    private Integer width;
+    private Integer width = 250;
 
     /**
      * 图片的高
      */
-    private Integer height;
+    private Integer height = 30;
 
     /**
      * 图片验证码长度
      */
-    private Integer length;
+    private Integer length = 6;
+
+    /**
+     * 过期时间
+     */
+    private Integer expireTime = 60;
 }

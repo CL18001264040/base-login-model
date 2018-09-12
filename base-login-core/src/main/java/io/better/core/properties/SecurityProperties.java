@@ -3,7 +3,6 @@ package io.better.core.properties;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
 
 /**
  * security 属性
@@ -11,20 +10,18 @@ import org.springframework.stereotype.Component;
  * @author better
  * @date create in 2018/9/12 下午7:59
  */
-@ConfigurationProperties(prefix = "base-login.security")
+@Setter
+@Getter
+@ConfigurationProperties(prefix = "base-login-security")
 public class SecurityProperties {
 
     /**
      * 图片相关属性
      */
-    @Setter
-    @Getter
-    public ImageCodeProperties imageProp = new ImageCodeProperties();
+    private ImageCodeProperties imageProp = new ImageCodeProperties();
 
     /**
      * 短信相关属性
      */
-    @Setter
-    @Getter
-    public SmsCodeProperties smsProp = new SmsCodeProperties();
+    private SmsCodeProperties smsProp = new SmsCodeProperties();
 }

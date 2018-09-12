@@ -8,3 +8,18 @@ spring:
     username: root
     password: 12345678
     url: jdbc:mysql://localhost:3306/better
+
+security:
+  basic:
+    enabled: false
+
+base-login-security:
+  image-prop:
+    length: 6
+    width: 100
+    height: 100
+    expire-time: 60
+  sms-prop:
+    length: 6
+    expire-time: 60
+

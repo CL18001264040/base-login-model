@@ -21,4 +21,9 @@ public class SmsCodeProperties {
      * 短信验证码的长度
      */
     private Integer length;
+
+    /**
+     * 过期时间
+     */
+    private Integer expireTime = 60;
 }
