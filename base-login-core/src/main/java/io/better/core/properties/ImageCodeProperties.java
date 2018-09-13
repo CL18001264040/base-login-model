@@ -12,7 +12,6 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-@NoArgsConstructor
 public class ImageCodeProperties {
 
     /**
@@ -34,4 +33,9 @@ public class ImageCodeProperties {
      * 过期时间
      */
     private Integer expireTime = 60;
+
+    /**
+     * 是否有字母
+     */
+    private Boolean hasLetter = Boolean.TRUE;
 }

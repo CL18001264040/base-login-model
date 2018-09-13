@@ -1,5 +1,6 @@
-package io.better.core.validate;
+package io.better.core.validate.generator.impl;
 
+import io.better.core.validate.generator.AbstractValidCodeGenerator;
 import org.springframework.stereotype.Component;
 
 /**
@@ -7,7 +8,7 @@ import org.springframework.stereotype.Component;
  * @date create in 2018/9/12 下午7:51
  */
 @Component
-public class ImageCodeGenerator extends AbstractValidCodeGenerator {
+public class StandardImageCodeGenerator extends AbstractValidCodeGenerator {
 
     /**
      * 生成验证码方法，由子类实现自己的生成逻辑
@@ -15,7 +16,7 @@ public class ImageCodeGenerator extends AbstractValidCodeGenerator {
      * @return 生成结果
      */
     @Override
-    String generatorValidCode() {
+    protected String generatorValidCode() {
         return null;
     }
 }
