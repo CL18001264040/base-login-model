@@ -1,4 +1,4 @@
-package io.better.core.validate;
+package io.better.core.validate.generator;
 
 /**
  * 抽象的验证码生成器
@@ -13,5 +13,5 @@ public abstract class AbstractValidCodeGenerator implements CodeGenerator {
      *
      * @return 生成结果
      */
-    abstract String generatorValidCode();
+    protected abstract String generatorValidCode();
 }

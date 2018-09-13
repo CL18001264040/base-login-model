@@ -1,4 +1,4 @@
-package io.better.core.validate;
+package io.better.core.validate.generator;
 
 /**
  * code生成借口
