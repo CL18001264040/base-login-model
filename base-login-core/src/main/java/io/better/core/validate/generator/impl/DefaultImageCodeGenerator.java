@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  * @date create in 2018/9/12 下午7:51
  */
 @Component
-public class StandardImageCodeGenerator extends AbstractValidCodeGenerator {
+public class DefaultImageCodeGenerator extends AbstractValidCodeGenerator {
 
     /**
      * 生成验证码方法，由子类实现自己的生成逻辑
