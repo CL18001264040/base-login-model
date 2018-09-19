@@ -24,4 +24,9 @@ public class SecurityProperties {
      * 短信相关属性
      */
     private SmsCodeProperties smsProp = new SmsCodeProperties();
+
+    /**
+     * 认证相关的属性
+     */
+    private AuthenticationProperties authenticationProp =  new AuthenticationProperties();
 }
