@@ -1,9 +1,12 @@
 package io.better.app.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 /**
  * The type App security config.
@@ -14,6 +17,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Order(101)
 @Configuration
 public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private AuthenticationSuccessHandler appAuthenticationSuccessHandler;
+
+    @Autowired
+    private AuthenticationFailureHandler appAuthenticationFailureHandler;
 
     /**
      * App的Security配置
