@@ -23,7 +23,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     private AuthenticationSuccessHandler browserAuthenticationSuccessHandler;
 
     @Autowired
-    private AuthenticationFailureHandler browserAuthenticationFailureHandler;
+    private AuthenticationFailureHandler browserAuthenticationFailedHandler;
 
     /**
      * 浏览器的Security配置

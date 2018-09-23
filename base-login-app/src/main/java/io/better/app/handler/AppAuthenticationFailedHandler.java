@@ -1,6 +1,5 @@
 package io.better.app.handler;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
@@ -16,7 +15,6 @@ import java.io.IOException;
  * @author better create in 2018/9/23 10:31
  */
 @Component
-@ConditionalOnMissingBean(name = "appAuthenticationFailedHandler")
 public class AppAuthenticationFailedHandler implements AuthenticationFailureHandler {
 
     /**

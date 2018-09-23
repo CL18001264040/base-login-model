@@ -22,7 +22,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     private AuthenticationSuccessHandler appAuthenticationSuccessHandler;
 
     @Autowired
-    private AuthenticationFailureHandler appAuthenticationFailureHandler;
+    private AuthenticationFailureHandler appAuthenticationFailedHandler;
 
     /**
      * App的Security配置
