@@ -25,7 +25,7 @@ public class AuthenticationProperties {
     /**
      * ip认证的url
      */
-    private String ipAuthUrl;
+    private String ipAuthUrl = "/ip";
 
     /**
      * 权限
