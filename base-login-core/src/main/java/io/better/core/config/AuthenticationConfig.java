@@ -17,17 +17,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AuthenticationConfig {
 
+    @Autowired
     private SecurityProperties securityProperties;
 
-    /**
-     * Instantiates a new Authentication config.
-     *
-     * @param securityProperties the security properties
-     */
-    @Autowired
-    public AuthenticationConfig(SecurityProperties securityProperties) {
-        this.securityProperties = securityProperties;
-    }
 
     /**
      * Ip authentication filter ip authentication filter.
