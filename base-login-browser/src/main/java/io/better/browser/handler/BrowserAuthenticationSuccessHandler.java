@@ -1,6 +1,5 @@
 package io.better.browser.handler;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -16,7 +15,6 @@ import java.io.IOException;
  * @author better create in 2018/9/23 10:28
  */
 @Component
-@ConditionalOnMissingBean(name = "browserAuthenticationSuccessHandler")
 public class BrowserAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
     /**
