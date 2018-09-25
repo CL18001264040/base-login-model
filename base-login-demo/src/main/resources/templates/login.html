@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Spring Security Login Page</title>
+</head>
+<body style="text-align:center;">
+
+<h3>Welcome Security Login Page</h3>
+
+<form th:action="@{/login}" th:method="post">
+
+    用户名:<input type="text" name="username"/>
+    <br/>
+    密码: <input type="password" name="password"/>
+
+    <button type="submit">提交</button>
+</form>
+
+</body>
+</html>

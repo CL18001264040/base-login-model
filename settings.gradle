@@ -1,7 +1,6 @@
 rootProject.name = 'base-login-model'
 include 'base-login-core'
 include 'base-login-browser'
-include 'base-login-common'
 include 'base-login-app'
 include 'base-login-demo'
 
