@@ -14,7 +14,6 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
  * @author better
  * @date create in 2018/9/17 下午5:01
  */
-@Order(101)
 @Configuration
 public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 
