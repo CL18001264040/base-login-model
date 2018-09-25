@@ -1,6 +1,5 @@
 server:
   port: 8099
-  servlet-path: /base-login
 
 spring:
   datasource:
