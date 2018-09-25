@@ -1,5 +1,8 @@
 dependencies {
 
+    compile('org.webjars:jquery:3.3.1-1')
+    compile('org.webjars:bootstrap:4.1.3')
+
     //compile project(':base-login-app')
     compile project(':base-login-browser')
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
