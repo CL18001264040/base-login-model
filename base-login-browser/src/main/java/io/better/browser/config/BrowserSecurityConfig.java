@@ -40,6 +40,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
                 .antMatchers("/", "/home").permitAll()
+                .antMatchers("/login/base", "/login/sms", "/login/qq", "/login/weChat").permitAll()
                 .antMatchers("/user/**").hasRole("USER")
                 .anyRequest().authenticated()
             .and()
