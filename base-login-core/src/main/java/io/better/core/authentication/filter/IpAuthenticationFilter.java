@@ -46,6 +46,6 @@ public class IpAuthenticationFilter extends AbstractAuthenticationProcessingFilt
             throws AuthenticationException, IOException, ServletException {
 
         String requestIp = request.getRemoteHost();
-        return getAuthenticationManager().authenticate(new IpAuthenticationToken(requestIp));
+        return this.getAuthenticationManager().authenticate(new IpAuthenticationToken(requestIp));
     }
 }
