@@ -35,19 +35,19 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
      * @throws Exception
      */
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(final HttpSecurity http) throws Exception {
 
         http
-            .authorizeRequests()
+                .authorizeRequests()
                 .antMatchers("/", "/home").permitAll()
-                .antMatchers("/login/base", "/login/sms", "/login/qq", "/login/weChat").permitAll()
+                .antMatchers("/login/base", "/login/sms", "/login/qq", "/login/weChat", "/api/validate/code/**").permitAll()
                 .antMatchers("/user/**").hasRole("USER")
                 .anyRequest().authenticated()
-            .and()
+                .and()
                 .formLogin()
                 .loginPage("/login")
                 .permitAll()
-            .and()
+                .and()
                 .logout()
                 .permitAll();
 
@@ -61,7 +61,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
      * @param web
      */
     @Override
-    public void configure(WebSecurity web) throws Exception {
+    public void configure(final WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/webjars/**", "/img/**", "/css/**", "/js/**");
     }
 
@@ -72,13 +72,13 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
      * @throws Exception
      */
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
 
         auth
-            .inMemoryAuthentication()
+                .inMemoryAuthentication()
                 .withUser("admin").password("123456").roles("USER")
-            .and()
-                .passwordEncoder(bCryptPasswordEncoder());
+                .and()
+                .passwordEncoder(this.bCryptPasswordEncoder());
     }
 
     /**

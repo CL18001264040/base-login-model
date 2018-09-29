@@ -1,6 +1,5 @@
 package io.better.core.validate.impl;
 
-import io.better.core.validate.AbstractValidateCoreProcessor;
 import io.better.core.validate.ValidateCoreProcessor;
 import org.springframework.stereotype.Component;
 
@@ -11,5 +10,5 @@ import org.springframework.stereotype.Component;
  * @date create in 2018/9/12 下午7:49
  */
 @Component
-public class SmsValidateCoreProcessorImpl extends AbstractValidateCoreProcessor implements ValidateCoreProcessor {
+public class SmsValidateCoreProcessorImpl implements ValidateCoreProcessor {
 }

@@ -52,7 +52,7 @@
                     <li>基础登录</li>
                 </ul>
                 <button type="button" class="btn btn-lg btn-block btn-primary" data-toggle="modal"
-                       onclick="btnLogin('Base')">Base Login
+                        onclick="btnLogin('Base')">Base Login
                 </button>
             </div>
         </div>
@@ -124,7 +124,7 @@
                         <div class="input-group">
                             <input type="text" class="form-control" name="validateCode" id="validateCode"/>
                             <div class="input-group-append" onclick="refreshValidateCode()">
-                                <div class="input-group-text" id="resValidateCode"></div>
+                                <span class="input-group-text" id="resValidateCode"></span>
                             </div>
                         </div>
                     </di>
@@ -178,7 +178,7 @@
 
         switch (type) {
             case 'Base':
-                $('#resValidateCode').text('1-ZX-ASD-DAS');
+                refreshValidateCode();
                 $('#baseLoginModal').modal('show');
                 break;
             case 'QQ':
@@ -189,8 +189,16 @@
                 break;
         }
     }
+
     function refreshValidateCode() {
-        $('#resValidateCode').text('1-ZX-ASD-DAS');
+
+        $.ajax({
+            url: '/api/validate/code/img',
+            type: 'GET',
+            success: function (result) {
+                $('#resValidateCode').text(result);
+            }
+        });
     }
 </script>
 </html>
