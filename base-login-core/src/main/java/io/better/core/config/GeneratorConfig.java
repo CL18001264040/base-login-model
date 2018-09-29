@@ -1,8 +1,9 @@
 package io.better.core.config;
 
+import io.better.core.properties.SecurityProperties;
 import io.better.core.validate.generator.CodeGenerator;
-import io.better.core.validate.generator.impl.DefaultImageCodeGenerator;
-import io.better.core.validate.generator.impl.DefaultSmsCodeGenerator;
+import io.better.core.validate.generator.impl.ImageCodeGenerator;
+import io.better.core.validate.generator.impl.SmsCodeGenerator;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class GeneratorConfig {
 
+    private SecurityProperties securityProperties;
+
     /**
      * 如果没提供smsCodeGenerator组件，则使用默认的短信验证码生成器
      *
@@ -21,7 +24,7 @@ public class GeneratorConfig {
     @Bean
     @ConditionalOnMissingBean(name = "smsCodeGenerator")
     public CodeGenerator smsCodeGenerator() {
-        return new DefaultSmsCodeGenerator();
+        return new SmsCodeGenerator(this.securityProperties);
     }
 
     /**
@@ -32,6 +35,6 @@ public class GeneratorConfig {
     @Bean
     @ConditionalOnMissingBean(name = "imageCodeGenerator")
     public CodeGenerator imageCodeGenerator() {
-        return new DefaultImageCodeGenerator();
+        return new ImageCodeGenerator(this.securityProperties);
     }
 }
