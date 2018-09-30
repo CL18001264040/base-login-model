@@ -1,9 +1,10 @@
 package io.better.rbac.model;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import io.better.rbac.common.BaseModel;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * @author better
@@ -11,7 +12,11 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@TableName(value = "group_user")
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@Table(name = "group_user")
+@Entity
 public class GroupUser extends BaseModel<Long> {
 
     /**
