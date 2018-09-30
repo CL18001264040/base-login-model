@@ -3,4 +3,5 @@ include 'base-login-core'
 include 'base-login-browser'
 include 'base-login-app'
 include 'base-login-demo'
+include 'base-login-rbac'
 

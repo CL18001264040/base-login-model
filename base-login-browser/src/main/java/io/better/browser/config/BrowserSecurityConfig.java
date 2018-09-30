@@ -38,18 +38,23 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
 
         http
-                .authorizeRequests()
+            .authorizeRequests()
                 .antMatchers("/", "/home").permitAll()
                 .antMatchers("/login/base", "/login/sms", "/login/qq", "/login/weChat", "/api/validate/code/**").permitAll()
                 .antMatchers("/user/**").hasRole("USER")
                 .anyRequest().authenticated()
-                .and()
+            .and()
                 .formLogin()
+                //设置自定义的登录页面
                 .loginPage("/login")
+                //设置自定义的登录url
+                .loginProcessingUrl("/login/base")
                 .permitAll()
-                .and()
+            .and()
                 .logout()
-                .permitAll();
+                .permitAll()
+            .and()
+                .csrf().disable();
 
         //http.addFilterBefore(ipAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
