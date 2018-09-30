@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "users")
+@Table(name = "tbl_users")
 @Entity
 public class Users extends BaseModel<Long> {
 

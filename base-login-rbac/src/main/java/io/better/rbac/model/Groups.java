@@ -15,9 +15,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "group")
+@Table(name = "tbl_groups")
 @Entity
-public class Group extends BaseModel<Long> {
+public class Groups extends BaseModel<Long> {
 
     /**
      * 分组名称

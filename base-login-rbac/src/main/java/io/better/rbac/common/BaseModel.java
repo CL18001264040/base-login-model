@@ -42,7 +42,7 @@ public class BaseModel<T> implements Serializable {
      * 创建时间
      */
     @CreatedDate
-    @Column(name = "create_time")
+    @Column(name = "create_time", columnDefinition = "TIMESTAMP")
     private LocalDateTime createTime;
 
     /**
@@ -54,6 +54,6 @@ public class BaseModel<T> implements Serializable {
      * 更新时间
      */
     @LastModifiedDate
-    @Column(name = "update_time")
+    @Column(name = "update_time", columnDefinition = "TIMESTAMP")
     private LocalDateTime updateTime;
 }

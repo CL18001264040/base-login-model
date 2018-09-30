@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "roles")
+@Table(name = "tbl_roles")
 @Entity
 public class Roles extends BaseModel<Long> {
 
@@ -36,7 +36,7 @@ public class Roles extends BaseModel<Long> {
     /**
      * 角色唯一ID
      */
-    @Column(name = "name", nullable = false, unique = true)
+    @Column(name = "unique_id", nullable = false, unique = true)
     private String uniqueId;
 
     /**

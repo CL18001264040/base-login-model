@@ -7,6 +7,12 @@ spring:
     username: root
     password: 12345678
     url: jdbc:mysql://localhost:3306/better
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQLDialect
+    generate-ddl: true
+    show-sql: true
 
 security:
   basic:
