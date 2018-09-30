@@ -1,21 +1,22 @@
 package io.better.rbac.servoce;
 
-import io.better.rbac.model.Group;
 import io.better.rbac.model.Users;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
+ * The interface Users service.
+ *
  * @author better
  * @date create in 2018/9/30 下午4:56
  */
 public interface UsersService {
 
     /**
-     * 根据分组 -> 获取用户集合
+     * 获取所有的用户
      *
-     * @param group
-     * @return
+     * @param pageable the pageable
+     * @return page
      */
-    List<Users> listUsersByGroup(Group group);
+    Page<Users> listUsers(Pageable pageable);
 }

@@ -1,4 +1,5 @@
 dependencies {
-    
+
+    compile project(':base-login-rbac')
     compileOnly("org.springframework.boot:spring-boot-configuration-processor")
 }
