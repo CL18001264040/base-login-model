@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "group_user")
+@Table(name = "tbl_group_user")
 @Entity
 public class GroupUser extends BaseModel<Long> {
 

@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "permissions")
+@Table(name = "tbl_permissions")
 @Entity
 public class Permissions extends BaseModel<Long> {
 

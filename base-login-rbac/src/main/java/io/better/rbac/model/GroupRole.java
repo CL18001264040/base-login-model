@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "group_role")
+@Table(name = "tbl_group_role")
 @Entity
 public class GroupRole extends BaseModel<Long> {
 
