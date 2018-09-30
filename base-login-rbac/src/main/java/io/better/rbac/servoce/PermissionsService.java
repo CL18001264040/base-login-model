@@ -16,7 +16,7 @@ public interface PermissionsService {
     /**
      * 根据角色 -> 获取权限集合
      *
-     * @param roles
+     * @param roles 角色信息
      * @return
      */
     List<Permissions> listPermissionsByRoles(Roles roles);
