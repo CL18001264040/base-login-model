@@ -1,7 +1,8 @@
 package io.better.rbac.servoce;
 
 import io.better.rbac.model.Group;
-import io.better.rbac.model.Users;
+import io.better.rbac.model.dto.GroupDto;
+import io.better.rbac.model.dto.UsersDto;
 
 import java.util.List;
 
@@ -17,5 +18,5 @@ public interface GroupService {
      * @param group
      * @return
      */
-    List<Users> listUsersByGroup(Group group);
+    List<UsersDto> listUsersByGroup(Group group);
 }

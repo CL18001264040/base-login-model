@@ -1,10 +1,7 @@
 package io.better.rbac.model;
 
 import io.better.rbac.common.BaseModel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +15,7 @@ import javax.persistence.Table;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @Table(name = "group_role")
 @Entity
 public class GroupRole extends BaseModel<Long> {

@@ -1,10 +1,7 @@
 package io.better.rbac.model;
 
 import io.better.rbac.common.BaseModel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -19,6 +16,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @Table(name = "roles")
 @Entity
 public class Roles extends BaseModel<Long> {

@@ -1,10 +1,10 @@
 package io.better.rbac.model;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import io.better.rbac.common.BaseModel;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.util.List;
 
@@ -14,7 +14,11 @@ import java.util.List;
  */
 @Getter
 @Setter
-@TableName(value = "users")
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@Table(name = "users")
+@Entity
 public class Users extends BaseModel<Long> {
 
     /**

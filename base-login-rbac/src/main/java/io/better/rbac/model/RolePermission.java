@@ -1,9 +1,10 @@
 package io.better.rbac.model;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import io.better.rbac.common.BaseModel;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * The type Role permission.
@@ -13,7 +14,11 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@TableName(value = "role_permission")
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@Table(name = "role_permission")
+@Entity
 public class RolePermission extends BaseModel<Long> {
 
     /**
