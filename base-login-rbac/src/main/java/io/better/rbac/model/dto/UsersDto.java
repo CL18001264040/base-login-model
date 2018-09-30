@@ -1,9 +1,7 @@
 package io.better.rbac.model.dto;
 
 import io.better.rbac.model.Users;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
@@ -17,8 +15,13 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class UsersDto implements Serializable {
 
+    private String userName;
+
+    private String password;
 
     /**
      * 转换Users -> UserDto

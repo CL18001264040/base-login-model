@@ -1,6 +1,9 @@
 package io.better.api;
 
+import io.better.rbac.model.dto.UsersDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -9,12 +12,17 @@ import org.springframework.web.servlet.ModelAndView;
  * @date create in 2018/9/25 下午8:02
  */
 @RestController
+@Slf4j
 public class LoginController {
 
-    @GetMapping(value = {"/index", "/", "/home"})
-    public ModelAndView login() {
-
-        return new ModelAndView("login");
+    @GetMapping(value = "/user/{userId}")
+    public UsersDto getUser(@PathVariable String userId) {
+        log.info("userId => {}", userId);
+        return new UsersDto("admin", "12312");
     }
 
+    @GetMapping(value = "/login")
+    public ModelAndView loginPage() {
+        return new ModelAndView("login");
+    }
 }
