@@ -47,6 +47,11 @@ public class Users extends BaseModel<Long> {
     private State state;
 
     /**
+     * 分组唯一ID
+     */
+    private String groupUniqueId;
+
+    /**
      * 用户 -> 角色集合
      */
     @Transient
