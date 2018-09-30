@@ -13,15 +13,4 @@ import java.util.List;
  */
 @Service
 public class GroupServiceImpl implements GroupService {
-
-    /**
-     * 根据分组 -> 获取用户集合
-     *
-     * @param group
-     * @return
-     */
-    @Override
-    public List<Users> listUsersByGroup(Group group) {
-        return null;
-    }
 }
