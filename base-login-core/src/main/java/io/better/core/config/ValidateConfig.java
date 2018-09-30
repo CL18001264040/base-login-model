@@ -36,7 +36,7 @@ public class ValidateConfig {
      * @return the image code generator
      */
     @Bean
-    @ConditionalOnMissingBean(name = "imageCodeGenerator")
+    @ConditionalOnMissingBean
     public ImageCodeGenerator imageCodeGenerator() {
 
         return new ImageCodeGenerator(this.securityProperties);
@@ -48,7 +48,7 @@ public class ValidateConfig {
      * @return the sms code generator
      */
     @Bean
-    @ConditionalOnMissingBean(name = "smsCodeGenerator")
+    @ConditionalOnMissingBean
     public SmsCodeGenerator smsCodeGenerator() {
 
         return new SmsCodeGenerator(this.securityProperties);
