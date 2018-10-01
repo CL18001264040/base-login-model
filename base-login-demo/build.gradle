@@ -5,5 +5,5 @@ dependencies {
 
     //compile project(':base-login-app')
     compile project(':base-login-browser')
-    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+    
 }

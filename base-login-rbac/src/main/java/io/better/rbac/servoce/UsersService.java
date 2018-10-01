@@ -16,6 +16,14 @@ import java.util.List;
 public interface UsersService {
 
     /**
+     * 根据用户名获取到用户信息
+     *
+     * @param userName
+     * @return
+     */
+    Users getUsersByUserName(String userName);
+
+    /**
      * 获取所有的用户
      *
      * @param pageable the pageable

@@ -21,6 +21,8 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 public class BaseModel<T> implements Serializable {
 
+    private static final long serialVersionUID = -2242271403250042774L;
+
     /**
      * id
      */
@@ -31,6 +33,7 @@ public class BaseModel<T> implements Serializable {
     /**
      * 是否有效
      */
+    @Column(name = "enable")
     private Boolean enable = Boolean.TRUE;
 
     /**
@@ -42,7 +45,7 @@ public class BaseModel<T> implements Serializable {
      * 创建时间
      */
     @CreatedDate
-    @Column(name = "create_time", columnDefinition = "TIMESTAMP")
+    @Column(name = "create_time")
     private LocalDateTime createTime;
 
     /**
@@ -54,6 +57,6 @@ public class BaseModel<T> implements Serializable {
      * 更新时间
      */
     @LastModifiedDate
-    @Column(name = "update_time", columnDefinition = "TIMESTAMP")
+    @Column(name = "update_time")
     private LocalDateTime updateTime;
 }

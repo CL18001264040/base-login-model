@@ -29,6 +29,26 @@ public class UsersServiceImpl implements UsersService {
     }
 
     /**
+     * 根据用户名获取到用户信息
+     *
+     * @param userName
+     * @return
+     */
+    @Override
+    public Users getUsersByUserName(String userName) {
+
+        List<Predicate> predicates = new LinkedList<>();
+
+        return usersRepository.findOne((root, query, cb) -> {
+            if (StringUtils.isNoneBlank(userName)) {
+                predicates.add(cb.equal(root.get("userName"), userName));
+            }
+            query.where(predicates.toArray(new Predicate[predicates.size()]));
+            return query.getRestriction();
+        });
+    }
+
+    /**
      * 获取所有的用户
      *
      * @return

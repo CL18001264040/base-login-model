@@ -13,18 +13,15 @@ spring:
     database-platform: org.hibernate.dialect.MySQLDialect
     generate-ddl: true
     show-sql: true
+  thymeleaf:
+    cache: false
 
 security:
   basic:
     enabled: false
 
-base-login-security:
-  image-prop:
-    length: 6
-    width: 100
-    height: 100
-    expire-time: 60
-  sms-prop:
-    length: 6
-    expire-time: 60
+better:
+  security:
+#    browser:
+#      login-page: /login.html
 

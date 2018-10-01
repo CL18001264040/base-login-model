@@ -12,21 +12,26 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Setter
 @Getter
-@ConfigurationProperties(prefix = "base-login-security")
+@ConfigurationProperties(prefix = "better.security")
 public class SecurityProperties {
 
     /**
-     * 图片相关属性
+     * 浏览器相关配置
      */
-    private ImageCodeProperties imageProp = new ImageCodeProperties();
+    private BrowserProperties browser = new BrowserProperties();
 
     /**
-     * 短信相关属性
+     * 验证码相关配置
      */
-    private SmsCodeProperties smsProp = new SmsCodeProperties();
+    private ValidateProperties validate = new ValidateProperties();
 
     /**
-     * 认证相关的属性
+     * 第三方登录配置
      */
-    private AuthenticationProperties authenticationProp =  new AuthenticationProperties();
+    private SocialProperties social = new SocialProperties();
+
+    /**
+     * OAuth2相关配置
+     */
+    private Oauth2Properties oAuth2 = new Oauth2Properties();
 }

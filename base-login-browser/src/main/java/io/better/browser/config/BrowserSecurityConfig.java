@@ -1,9 +1,9 @@
 package io.better.browser.config;
 
+import io.better.core.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -28,6 +28,13 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AuthenticationFailureHandler browserAuthenticationFailedHandler;
 
+    private final SecurityProperties securityProperties;
+
+    @Autowired
+    public BrowserSecurityConfig(SecurityProperties securityProperties) {
+        this.securityProperties = securityProperties;
+    }
+
     /**
      * 浏览器的Security配置
      *
@@ -38,21 +45,21 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
 
         http
-            .authorizeRequests()
-                .antMatchers("/api/validate/code/**").permitAll()
-                .antMatchers("/user/**").hasRole("USER")
-                .anyRequest().authenticated()
-            .and()
                 .formLogin()
                 //设置自定义的登录页面
-                .loginPage("/login")
+                .loginPage("/browser/authentication/require")
                 //设置自定义的登录url
                 .loginProcessingUrl("/login/base")
                 .permitAll()
-            .and()
+                .and()
+                .authorizeRequests()
+                .antMatchers("/api/validate/code/**").permitAll()
+                .antMatchers("/browser/authentication/require", securityProperties.getBrowser().getLoginPage()).permitAll()
+                .anyRequest().authenticated()
+                .and()
                 .logout()
                 .permitAll()
-            .and()
+                .and()
                 .csrf().disable();
 
         //http.addFilterBefore(ipAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
@@ -66,23 +73,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     public void configure(final WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/webjars/**", "/img/**", "/css/**", "/js/**");
-    }
-
-    /**
-     * 配置内存中的用户信息-测试使用
-     *
-     * @param auth 认证管理构建
-     * @throws Exception
-     */
-    @Override
-    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-
-        auth
-                .inMemoryAuthentication()
-                .withUser("admin").password("123456").roles("USER")
-                .and()
-                .passwordEncoder(this.bCryptPasswordEncoder());
+        web.ignoring().antMatchers("/webjars/**", "/img/**", "/css/**", "/static/js/**");
     }
 
     /**
