@@ -1,9 +1,10 @@
 package io.better.core.validate.img;
 
+import io.better.core.validate.ValidateCode;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.awt.image.BufferedImage;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -12,25 +13,14 @@ import java.time.LocalDateTime;
  * @author better create in 2018/10/2 10:20
  */
 @Data
-public class ImageCode implements Serializable {
+@EqualsAndHashCode(callSuper = true)
+public class ImageCode extends ValidateCode {
 
-    private static final long serialVersionUID = 4701256229331697097L;
-
+    private static final long serialVersionUID = 6808424861880816916L;
     /**
-     *
+     * 生成的图片
      */
     private BufferedImage image;
-
-    /**
-     *
-     */
-    private String code;
-
-    /**
-     *
-     */
-    private LocalDateTime expireTime;
-
 
     /**
      * Instantiates a new Image code.
@@ -40,9 +30,8 @@ public class ImageCode implements Serializable {
      * @param expireTime the expire time
      */
     public ImageCode(BufferedImage image, String code, Long expireTime) {
+        super(code, expireTime);
         this.image = image;
-        this.code = code;
-        this.expireTime = LocalDateTime.now().plusSeconds(expireTime);
     }
 
     /**
@@ -53,17 +42,7 @@ public class ImageCode implements Serializable {
      * @param expireTime the expire time
      */
     public ImageCode(BufferedImage image, String code, LocalDateTime expireTime) {
+        super(code, expireTime);
         this.image = image;
-        this.code = code;
-        this.expireTime = expireTime;
-    }
-
-    /**
-     * Is expire boolean.
-     *
-     * @return the boolean
-     */
-    public Boolean isExpire() {
-        return LocalDateTime.now().isAfter(expireTime);
     }
 }

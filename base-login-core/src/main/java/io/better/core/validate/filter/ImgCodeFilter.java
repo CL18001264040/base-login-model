@@ -24,13 +24,13 @@ import java.util.Objects;
 /**
  * @author better create in 2018/10/2 10:08
  */
-public class ValidateCodeFilter extends OncePerRequestFilter {
+public class ImgCodeFilter extends OncePerRequestFilter {
 
     private final AuthenticationFailureHandler authenticationFailureHandler;
     private final SessionAttributeStore sessionAttributeStore;
 
     @Autowired
-    public ValidateCodeFilter(AuthenticationFailureHandler authenticationFailureHandler) {
+    public ImgCodeFilter(AuthenticationFailureHandler authenticationFailureHandler) {
         this.authenticationFailureHandler = authenticationFailureHandler;
         this.sessionAttributeStore = new DefaultSessionAttributeStore();
     }

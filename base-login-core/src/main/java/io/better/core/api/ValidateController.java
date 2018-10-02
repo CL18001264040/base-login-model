@@ -29,6 +29,7 @@ public class ValidateController {
      * 图片验证码的session key
      */
     public static final String IMG_CODE_SESSION_KEY = "IMG_CODE_SESSION_KEY";
+    public static final String SMS_CODE_SESSION_KEY = "SMS_CODE_SESSION_KEY";
 
     private final ImageCodeGenerator imageCodeGenerator;
     private final SmsCodeGenerator smsCodeGenerator;
