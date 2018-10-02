@@ -1,7 +1,7 @@
-package io.better.core.validate.generator.impl;
+package io.better.core.validate.sms;
 
 import io.better.core.properties.SecurityProperties;
-import io.better.core.validate.generator.CodeGenerator;
+import io.better.core.validate.CodeGenerator;
 
 import java.util.Arrays;
 

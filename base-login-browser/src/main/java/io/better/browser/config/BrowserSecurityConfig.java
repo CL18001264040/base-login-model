@@ -48,17 +48,17 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                 //设置自定义的登录页面
                 .loginPage("/browser/authentication/require")
                 //设置自定义的登录url
-                .loginProcessingUrl("/login/base")
+                .loginProcessingUrl("/login/form")
                 .successHandler(browserAuthenticationSuccessHandler)
                 .failureHandler(browserAuthenticationFailedHandler)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/validate/code/**").permitAll()
-                .antMatchers("/browser/authentication/require", securityProperties.getBrowser().getLoginPage()).permitAll()
+                .antMatchers(
+                        "/api/validate/code/**",
+                        "/browser/authentication/require",
+                        securityProperties.getBrowser().getLoginPage()
+                ).permitAll()
                 .anyRequest().authenticated()
-                .and()
-                .logout()
-                .permitAll()
                 .and()
                 .csrf().disable();
 

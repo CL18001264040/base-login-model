@@ -115,7 +115,7 @@
                         <div class="input-group">
                             <input type="text" class="form-control" name="validateCode" id="validateCode"/>
                             <div class="input-group-append" onclick="refreshValidateCode()">
-                                <span class="input-group-text" id="resValidateCode"></span>
+                                <img src="/api/validate/code/img" alt="" id="imageCode">
                             </div>
                         </div>
                     </di>
@@ -183,23 +183,23 @@
 
     function refreshValidateCode() {
 
-        $.ajax({
+        /*$.ajax({
             url: '/api/validate/code/img',
             type: 'GET',
             success: function (result) {
-                $('#resValidateCode').text(result);
+                $('#imageCode').src(result);
             }
-        });
+        });*/
     }
 
     function submitBaseLogin() {
         var data = $('#baseLoginForm').serialize();
         $.ajax({
-            url: '/login/base',
+            url: '/login/forms',
             type: 'POST',
             data: data,
             success: function (result) {
-                
+
             }
         })
         ;

@@ -1,4 +1,4 @@
-package io.better.core.validate.impl;
+package io.better.core.validate.img;
 
 import io.better.core.validate.ValidateCoreProcessor;
 import org.springframework.stereotype.Component;

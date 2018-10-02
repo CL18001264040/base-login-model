@@ -1,8 +1,8 @@
 package io.better.core.config;
 
 import io.better.core.properties.SecurityProperties;
-import io.better.core.validate.generator.impl.ImageCodeGenerator;
-import io.better.core.validate.generator.impl.SmsCodeGenerator;
+import io.better.core.validate.img.ImageCodeGenerator;
+import io.better.core.validate.sms.SmsCodeGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;

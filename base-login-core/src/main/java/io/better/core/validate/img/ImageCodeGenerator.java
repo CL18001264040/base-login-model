@@ -1,9 +1,8 @@
-package io.better.core.validate.generator.impl;
+package io.better.core.validate.img;
 
 import io.better.core.properties.SecurityProperties;
-import io.better.core.validate.generator.CodeGenerator;
+import io.better.core.validate.CodeGenerator;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.UUID;
 
@@ -36,11 +35,7 @@ public class ImageCodeGenerator implements CodeGenerator<String, String> {
     @Override
     public String generatorCode(final String... inParams) {
         final String randomStr = UUID.randomUUID().toString();
-        String[] validateCodeArray = randomStr.substring(randomStr.indexOf("-") + 1, randomStr.lastIndexOf("-"))
-                .toUpperCase().split("-");
-        String validateCode = StringUtils.join(validateCodeArray);
-
-        log.info("generate validate code is => {}", validateCode);
-        return StringUtils.join(validateCodeArray, "-");
+        return randomStr.substring(randomStr.indexOf("-") + 1, randomStr.lastIndexOf("-"))
+                .toUpperCase();
     }
 }
