@@ -22,16 +22,15 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @EnableWebSecurity
 public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private AuthenticationSuccessHandler browserAuthenticationSuccessHandler;
-
-    @Autowired
-    private AuthenticationFailureHandler browserAuthenticationFailedHandler;
-
+    private final AuthenticationSuccessHandler browserAuthenticationSuccessHandler;
+    private final AuthenticationFailureHandler browserAuthenticationFailedHandler;
     private final SecurityProperties securityProperties;
 
     @Autowired
-    public BrowserSecurityConfig(SecurityProperties securityProperties) {
+    public BrowserSecurityConfig(AuthenticationSuccessHandler browserAuthenticationSuccessHandler,
+                                 AuthenticationFailureHandler browserAuthenticationFailedHandler, SecurityProperties securityProperties) {
+        this.browserAuthenticationSuccessHandler = browserAuthenticationSuccessHandler;
+        this.browserAuthenticationFailedHandler = browserAuthenticationFailedHandler;
         this.securityProperties = securityProperties;
     }
 
@@ -50,7 +49,8 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/browser/authentication/require")
                 //设置自定义的登录url
                 .loginProcessingUrl("/login/base")
-                .permitAll()
+                .successHandler(browserAuthenticationSuccessHandler)
+                .failureHandler(browserAuthenticationFailedHandler)
                 .and()
                 .authorizeRequests()
                 .antMatchers("/api/validate/code/**").permitAll()

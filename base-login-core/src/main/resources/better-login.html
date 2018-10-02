@@ -94,7 +94,7 @@
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <form th:action="@{/login/base}" method="post">
+            <form id="baseLoginForm" method="post">
                 <div class="modal-header">
                     <h5 class="modal-title" id="baseLoginModalLongTitle">Base Login</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -122,7 +122,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Base Login</button>
+                    <button type="submit" class="btn btn-primary" onclick="submitBaseLogin()">Base Login</button>
                 </div>
             </form>
         </div>
@@ -190,6 +190,19 @@
                 $('#resValidateCode').text(result);
             }
         });
+    }
+
+    function submitBaseLogin() {
+        var data = $('#baseLoginForm').serialize();
+        $.ajax({
+            url: '/login/base',
+            type: 'POST',
+            data: data,
+            success: function (result) {
+                
+            }
+        })
+        ;
     }
 </script>
 </html>
