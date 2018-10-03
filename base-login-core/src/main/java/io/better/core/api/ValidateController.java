@@ -1,12 +1,11 @@
 package io.better.core.api;
 
-import io.better.core.validate.img.ImageCodeGenerator;
-import io.better.core.validate.sms.SmsCodeGenerator;
-import org.apache.commons.lang3.StringUtils;
+import io.better.core.validate.ValidateCode;
+import io.better.core.validate.img.ImageValidateCodeGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.support.DefaultSessionAttributeStore;
 import org.springframework.web.bind.support.SessionAttributeStore;
@@ -29,47 +28,35 @@ public class ValidateController {
      * 图片验证码的session key
      */
     public static final String IMG_CODE_SESSION_KEY = "IMG_CODE_SESSION_KEY";
+    /**
+     * The constant SMS_CODE_SESSION_KEY.
+     */
     public static final String SMS_CODE_SESSION_KEY = "SMS_CODE_SESSION_KEY";
 
-    private final ImageCodeGenerator imageCodeGenerator;
-    private final SmsCodeGenerator smsCodeGenerator;
+    private final ImageValidateCodeGenerator imageCodeGenerator;
     private SessionAttributeStore sessionAttributeStores;
 
     /**
      * Instantiates a new Validate controller.
      *
      * @param imageCodeGenerator the image code generator
-     * @param smsCodeGenerator   the sms code generator
      */
     @Autowired
-    public ValidateController(final ImageCodeGenerator imageCodeGenerator, final SmsCodeGenerator smsCodeGenerator) {
+    public ValidateController(final ImageValidateCodeGenerator imageCodeGenerator) {
         this.imageCodeGenerator = imageCodeGenerator;
-        this.smsCodeGenerator = smsCodeGenerator;
         this.sessionAttributeStores = new DefaultSessionAttributeStore();
     }
 
     /**
      * Img code string.
      *
-     * @return the string
+     * @param type     the type
+     * @param request  the request
+     * @param response the response
      */
-    @GetMapping(value = "/code/img")
-    public String imgCode(HttpServletRequest request, HttpServletResponse response) {
+    @GetMapping(value = "/code/{type}")
+    public void imgCode(@PathVariable String type, HttpServletRequest request, HttpServletResponse response) {
 
-        String validate = this.imageCodeGenerator.generatorCode();
-        sessionAttributeStores.storeAttribute(new ServletWebRequest(request), IMG_CODE_SESSION_KEY,
-                StringUtils.join(StringUtils.split(validate, "-")));
-        return validate;
-    }
-
-    /**
-     * Sms code string.
-     *
-     * @return the string
-     */
-    @GetMapping(value = "/code/sms")
-    public String smsCode(@RequestParam("cellPhone") final String cellPhone) {
-
-        return this.smsCodeGenerator.generatorCode(cellPhone);
+        ValidateCode validateCode = this.imageCodeGenerator.generatorCode(new ServletWebRequest(request, response));
     }
 }

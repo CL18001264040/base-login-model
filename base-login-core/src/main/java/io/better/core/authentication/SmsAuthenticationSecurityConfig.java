@@ -1,4 +1,4 @@
-package io.better.core.config;
+package io.better.core.authentication;
 
 import io.better.core.authentication.filter.SmsAuthenticationFilter;
 import io.better.core.authentication.provider.SmsAuthenticationProvider;

@@ -1,9 +1,9 @@
 package io.better.core.config;
 
 import io.better.core.properties.SecurityProperties;
-import io.better.core.validate.CodeGenerator;
-import io.better.core.validate.img.ImageCodeGenerator;
-import io.better.core.validate.sms.SmsCodeGenerator;
+import io.better.core.validate.ValidateCodeGenerator;
+import io.better.core.validate.img.ImageValidateCodeGenerator;
+import io.better.core.validate.sms.SmsValidateCodeGenerator;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,8 +23,8 @@ public class GeneratorConfig {
      */
     @Bean
     @ConditionalOnMissingBean(name = "smsCodeGenerator")
-    public CodeGenerator smsCodeGenerator() {
-        return new SmsCodeGenerator(this.securityProperties);
+    public ValidateCodeGenerator smsCodeGenerator() {
+        return new SmsValidateCodeGenerator(this.securityProperties);
     }
 
     /**
@@ -34,7 +34,7 @@ public class GeneratorConfig {
      */
     @Bean
     @ConditionalOnMissingBean(name = "imageCodeGenerator")
-    public CodeGenerator imageCodeGenerator() {
-        return new ImageCodeGenerator(this.securityProperties);
+    public ValidateCodeGenerator imageCodeGenerator() {
+        return new ImageValidateCodeGenerator(this.securityProperties);
     }
 }

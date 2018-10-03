@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class ValidateCode implements Serializable {
 
     private static final long serialVersionUID = -5555060334255195552L;
-    
+
     /**
      * 短信验证码
      */
@@ -31,7 +31,7 @@ public class ValidateCode implements Serializable {
      * @param code       the code
      * @param expireTime the expire time
      */
-    public ValidateCode(String code, Long expireTime) {
+    public ValidateCode(String code, Integer expireTime) {
         this.code = code;
         this.expireTime = LocalDateTime.now().plusSeconds(expireTime);
     }

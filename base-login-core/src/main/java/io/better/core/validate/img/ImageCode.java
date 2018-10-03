@@ -29,7 +29,7 @@ public class ImageCode extends ValidateCode {
      * @param code       the code
      * @param expireTime the expire time
      */
-    public ImageCode(BufferedImage image, String code, Long expireTime) {
+    public ImageCode(BufferedImage image, String code, Integer expireTime) {
         super(code, expireTime);
         this.image = image;
     }

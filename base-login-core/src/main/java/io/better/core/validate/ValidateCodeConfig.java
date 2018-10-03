@@ -1,8 +1,8 @@
-package io.better.core.config;
+package io.better.core.validate;
 
 import io.better.core.properties.SecurityProperties;
-import io.better.core.validate.img.ImageCodeGenerator;
-import io.better.core.validate.sms.SmsCodeGenerator;
+import io.better.core.validate.img.ImageValidateCodeGenerator;
+import io.better.core.validate.sms.SmsValidateCodeGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -15,8 +15,7 @@ import org.springframework.context.annotation.Configuration;
  * @date create in 2018/9/13 下午3:59
  */
 @Configuration
-
-public class ValidateConfig {
+public class ValidateCodeConfig {
 
     private final SecurityProperties securityProperties;
 
@@ -26,7 +25,7 @@ public class ValidateConfig {
      * @param securityProperties the security properties
      */
     @Autowired
-    public ValidateConfig(final SecurityProperties securityProperties) {
+    public ValidateCodeConfig(final SecurityProperties securityProperties) {
         this.securityProperties = securityProperties;
     }
 
@@ -38,9 +37,9 @@ public class ValidateConfig {
      */
     @Bean
     @ConditionalOnMissingBean
-    public ImageCodeGenerator imageCodeGenerator() {
+    public ImageValidateCodeGenerator imageCodeGenerator() {
 
-        return new ImageCodeGenerator(this.securityProperties);
+        return new ImageValidateCodeGenerator(this.securityProperties);
     }
 
     /**
@@ -50,8 +49,8 @@ public class ValidateConfig {
      */
     @Bean
     @ConditionalOnMissingBean
-    public SmsCodeGenerator smsCodeGenerator() {
+    public SmsValidateCodeGenerator smsCodeGenerator() {
 
-        return new SmsCodeGenerator(this.securityProperties);
+        return new SmsValidateCodeGenerator(this.securityProperties);
     }
 }

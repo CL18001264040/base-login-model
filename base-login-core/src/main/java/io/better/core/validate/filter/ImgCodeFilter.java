@@ -76,12 +76,12 @@ public class ImgCodeFilter extends OncePerRequestFilter {
         }
 
         if (Objects.isNull(imageCode)) {
-            throw new ValidateCodeException("imageCode is not exits");
+            throw new ValidateCodeException("img is not exits");
         }
 
         if (imageCode.isExpire()) {
             sessionAttributeStore.cleanupAttribute(request, ValidateController.IMG_CODE_SESSION_KEY);
-            throw new ValidateCodeException("imageCode is expired");
+            throw new ValidateCodeException("img is expired");
         }
 
         if (StringUtils.equalsIgnoreCase(validateCode, imageCode.getCode())) {
