@@ -15,22 +15,11 @@ import java.util.Objects;
 @Component
 public class ValidateCodeBeanHolder {
 
-    private final Map<String, ValidateCodeProcessor> processorMap;
-    private final Map<String, ValidateCodeGenerator> generatorMap;
-
-    /**
-     * Instantiates a new Validate code bean holder.
-     *
-     * @param processorMap the processor map
-     * @param generatorMap the generator map
-     */
     @Autowired
-    public ValidateCodeBeanHolder(Map<String, ValidateCodeProcessor> processorMap, Map<String, ValidateCodeGenerator> generatorMap) {
-        this.processorMap = processorMap;
-        this.generatorMap = generatorMap;
-    }
-
-
+    private Map<String, ValidateCodeProcessor> processorMap;
+    @Autowired
+    private Map<String, ValidateCodeGenerator> generatorMap;
+    
     /**
      * Gets validate code processor.
      *

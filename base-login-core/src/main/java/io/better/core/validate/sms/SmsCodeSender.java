@@ -1,7 +1,6 @@
 package io.better.core.validate.sms;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 /**
  * The interface Sms code sender.
@@ -22,7 +21,6 @@ public interface SmsCodeSender {
      * 默认的短信验证码发送器
      */
     @Slf4j
-    @Component
     class DefaultSmsCodeSender implements SmsCodeSender {
 
         /**

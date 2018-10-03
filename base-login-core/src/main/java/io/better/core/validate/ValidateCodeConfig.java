@@ -2,6 +2,7 @@ package io.better.core.validate;
 
 import io.better.core.properties.SecurityProperties;
 import io.better.core.validate.img.ImageValidateCodeGenerator;
+import io.better.core.validate.sms.SmsCodeSender;
 import io.better.core.validate.sms.SmsValidateCodeGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -52,5 +53,11 @@ public class ValidateCodeConfig {
     public SmsValidateCodeGenerator smsCodeGenerator() {
 
         return new SmsValidateCodeGenerator(this.securityProperties);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public SmsCodeSender smsCodeSender() {
+        return new SmsCodeSender.DefaultSmsCodeSender();
     }
 }
