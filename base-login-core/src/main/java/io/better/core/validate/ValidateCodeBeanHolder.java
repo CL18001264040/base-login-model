@@ -19,15 +19,16 @@ public class ValidateCodeBeanHolder {
     private Map<String, ValidateCodeProcessor> processorMap;
     @Autowired
     private Map<String, ValidateCodeGenerator> generatorMap;
-    
+
     /**
      * Gets validate code processor.
      *
-     * @param key the key
+     * @param type the key
      * @return the validate code processor
      */
-    public ValidateCodeProcessor getValidateCodeProcessor(String key) {
-
+    public ValidateCodeProcessor getValidateCodeProcessor(String type) {
+        // 获取到对应的验证码处理器在容器中的名称
+        String key = type.toLowerCase() + ValidateCodeProcessor.class.getSimpleName();
         ValidateCodeProcessor validateCodeProcessor = processorMap.get(key);
         if (Objects.isNull(validateCodeProcessor)) {
             throw new ValidateCodeException(key + "is not exists");
@@ -36,11 +37,14 @@ public class ValidateCodeBeanHolder {
     }
 
     /**
-     * @param key the key
+     * Gets validate code generator.
+     *
+     * @param type the key
      * @return the validate code processor
      */
-    public ValidateCodeGenerator getValidateCodeGenerator(String key) {
-
+    public ValidateCodeGenerator getValidateCodeGenerator(String type) {
+        // 获取到对应的验证码生成器在容器中的名称
+        String key = type.toLowerCase() + ValidateCodeGenerator.class.getSimpleName();
         ValidateCodeGenerator validateCodeProcessor = generatorMap.get(key);
         if (Objects.isNull(validateCodeProcessor)) {
             throw new ValidateCodeException(key + "is not exists");

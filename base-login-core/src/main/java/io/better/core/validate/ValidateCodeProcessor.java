@@ -20,24 +20,27 @@ public interface ValidateCodeProcessor<T> {
      * 处理验证码请求
      *
      * @param request the request
+     * @param type    the type
      */
-    void processor(ServletWebRequest request);
+    void processor(ServletWebRequest request, String type);
 
     /**
      * 生成验证码
      *
      * @param request the request
+     * @param type    the type
      * @return the t
      */
-    T generate(ServletWebRequest request);
+    T generate(ServletWebRequest request, String type);
 
     /**
      * 保存验证码
      *
      * @param request      the request
      * @param validateCode the validate code
+     * @param type         the type
      */
-    void save(ServletWebRequest request, T validateCode);
+    void save(ServletWebRequest request, T validateCode, String type);
 
     /**
      * 发送验证码
@@ -51,6 +54,7 @@ public interface ValidateCodeProcessor<T> {
      * 校验验证码.
      *
      * @param request the request
+     * @param type    the type
      */
-    void validate(ServletWebRequest request);
+    void validate(ServletWebRequest request, String type);
 }

@@ -1,14 +1,13 @@
 package io.better.core.api;
 
-import io.better.core.validate.ValidateCode;
-import io.better.core.validate.img.ImageValidateCodeGenerator;
+import io.better.core.validate.ValidateCodeBeanHolder;
+import io.better.core.validate.ValidateCodeProcessor;
+import io.better.core.validate.ValidateCodeType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.support.DefaultSessionAttributeStore;
-import org.springframework.web.bind.support.SessionAttributeStore;
 import org.springframework.web.context.request.ServletWebRequest;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,30 +32,28 @@ public class ValidateController {
      */
     public static final String SMS_CODE_SESSION_KEY = "SMS_CODE_SESSION_KEY";
 
-    private final ImageValidateCodeGenerator imageCodeGenerator;
-    private SessionAttributeStore sessionAttributeStores;
+    private ValidateCodeBeanHolder validateCodeBeanHolder;
 
-    /**
-     * Instantiates a new Validate controller.
-     *
-     * @param imageCodeGenerator the image code generator
-     */
     @Autowired
-    public ValidateController(final ImageValidateCodeGenerator imageCodeGenerator) {
-        this.imageCodeGenerator = imageCodeGenerator;
-        this.sessionAttributeStores = new DefaultSessionAttributeStore();
+    public ValidateController(ValidateCodeBeanHolder validateCodeBeanHolder) {
+        this.validateCodeBeanHolder = validateCodeBeanHolder;
     }
+
 
     /**
      * Img code string.
      *
-     * @param type     the type
+     * @param type     the type , see {@link ValidateCodeType}
      * @param request  the request
      * @param response the response
      */
     @GetMapping(value = "/code/{type}")
-    public void imgCode(@PathVariable String type, HttpServletRequest request, HttpServletResponse response) {
+    public void code(@PathVariable("type") String type, HttpServletRequest request, HttpServletResponse response) {
 
-        ValidateCode validateCode = this.imageCodeGenerator.generatorCode(new ServletWebRequest(request, response));
+        ValidateCodeType validateCodeType = ValidateCodeType.valueOf(type);
+        String validateType = validateCodeType.getType();
+
+        ValidateCodeProcessor validateCodeProcessor = validateCodeBeanHolder.getValidateCodeProcessor(validateType);
+        validateCodeProcessor.processor(new ServletWebRequest(request, response), validateType);
     }
 }
