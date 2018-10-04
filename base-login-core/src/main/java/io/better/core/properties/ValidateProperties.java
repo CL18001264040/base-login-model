@@ -31,12 +31,12 @@ public class ValidateProperties {
         /**
          * 图片验证码的高
          */
-        private Integer height;
+        private Integer height = 25;
 
         /**
          * 图片验证码的宽
          */
-        private Integer width;
+        private Integer width = 100;
     }
 
     /**

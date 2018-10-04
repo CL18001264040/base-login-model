@@ -1,5 +1,6 @@
 package io.better.core.validate.sms;
 
+import io.better.core.support.Constant;
 import io.better.core.validate.AbstractValidateCodeProcessor;
 import io.better.core.validate.ValidateCodeBeanHolder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,7 @@ public class SmsValidateCodeProcessor extends AbstractValidateCodeProcessor<SmsC
      */
     @Override
     public void send(ServletWebRequest request, SmsCode validateCode) {
-
+        String cellPhone = request.getParameter(Constant.CELL_PHONE_REQ_PARAMETER.getContent());
+        smsCodeSender.sendSmsCode(cellPhone, validateCode.getCode());
     }
 }

@@ -115,7 +115,7 @@
                         <div class="input-group">
                             <input type="text" class="form-control" name="validateCode" id="validateCode"/>
                             <div class="input-group-append" onclick="refreshValidateCode()">
-                                <img src="/api/validate/code/img" alt="" id="imageCode">
+                                <img src="/api/validate/code/image?v=' + Math.random()" alt="">
                             </div>
                         </div>
                     </di>
@@ -154,7 +154,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Send Sms Code</button>
+                    <button type="button" class="btn btn-primary" onclick="sendSmsCode()">Send Sms Code</button>
                     <button type="submit" class="btn btn-primary">Sms Login</button>
                 </div>
             </form>
@@ -182,14 +182,6 @@
     }
 
     function refreshValidateCode() {
-
-        /*$.ajax({
-            url: '/api/validate/code/img',
-            type: 'GET',
-            success: function (result) {
-                $('#img').src(result);
-            }
-        });*/
     }
 
     function submitBaseLogin() {
@@ -201,8 +193,18 @@
             success: function (result) {
 
             }
-        })
-        ;
+        });
+    }
+
+    function sendSmsCode() {
+        var cellPhone = $('#cellPhone').val();
+        $.ajax({
+            url: '/api/validate/code/sms?cellPhone=' + cellPhone,
+            type: 'GET',
+            success: function (result) {
+
+            }
+        });
     }
 </script>
 </html>

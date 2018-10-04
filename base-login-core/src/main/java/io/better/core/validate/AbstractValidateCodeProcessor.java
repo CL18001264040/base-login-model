@@ -24,7 +24,7 @@ public abstract class AbstractValidateCodeProcessor<T extends ValidateCode> impl
     private ValidateCodeBeanHolder validateCodeBeanHolder;
 
     /**
-     * Instantiates a new Abstract validate code processor.
+     * Instantiates a new Abstract validate code processor.˚
      *
      * @param validateCodeBeanHolder the validate code bean holder
      */
@@ -102,7 +102,7 @@ public abstract class AbstractValidateCodeProcessor<T extends ValidateCode> impl
             validateCodeParam = ServletRequestUtils.getStringParameter(request.getRequest(), requestParam);
         } catch (ServletRequestBindingException exception) {
             log.error("get validateCodeParam is error => {}", exception);
-            throw new ValidateCodeException("get validaCodeParam is error");
+            throw new ValidateCodeException("get validaCodeParam is error " + exception.getMessage());
         }
 
         // 验证码是否存在
@@ -135,8 +135,7 @@ public abstract class AbstractValidateCodeProcessor<T extends ValidateCode> impl
      * @param type the type
      * @return the session key
      */
-    protected String getSessionKey(String type) {
-
+    private String getSessionKey(String type) {
         return SESSION_KEY_PREFIX + type.toUpperCase();
     }
 }

@@ -33,6 +33,11 @@ public enum Constant {
     IMG_CODE_REQ_PARAMETER("imgValidateCode"),
 
     /**
+     * 手机号请求参数
+     */
+    CELL_PHONE_REQ_PARAMETER("cellPhone"),
+
+    /**
      * Post请求
      */
     POST("Post"),
