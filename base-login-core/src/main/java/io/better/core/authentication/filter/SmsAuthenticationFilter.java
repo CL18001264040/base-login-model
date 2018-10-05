@@ -25,7 +25,7 @@ public class SmsAuthenticationFilter extends AbstractAuthenticationProcessingFil
     /**
      * The constant SMS_FORM_CELLPHONE_KEY.
      */
-    public static final String SMS_FORM_CELLPHONE_KEY = "username";
+    public static final String SMS_FORM_CELLPHONE_KEY = "cellPhone";
 
     private String cellPhoneParameter = SMS_FORM_CELLPHONE_KEY;
 

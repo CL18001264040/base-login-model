@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
  * @author better create in 2018/10/2 20:37
  */
 @Component
-public class SmsAuthenticationSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
+public class AuthenticationSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
 
     private UserDetailsService userDetailsService;
     private AuthenticationSuccessHandler authenticationSuccessHandler;
@@ -33,9 +33,9 @@ public class SmsAuthenticationSecurityConfig extends SecurityConfigurerAdapter<D
      * @param authenticationFailureHandler the authentication failure handler
      */
     @Autowired
-    public SmsAuthenticationSecurityConfig(UserDetailsService userDetailsService,
-                                           AuthenticationSuccessHandler authenticationSuccessHandler,
-                                           AuthenticationFailureHandler authenticationFailureHandler) {
+    public AuthenticationSecurityConfig(UserDetailsService userDetailsService,
+                                        AuthenticationSuccessHandler authenticationSuccessHandler,
+                                        AuthenticationFailureHandler authenticationFailureHandler) {
         this.userDetailsService = userDetailsService;
         this.authenticationSuccessHandler = authenticationSuccessHandler;
         this.authenticationFailureHandler = authenticationFailureHandler;
