@@ -13,19 +13,24 @@ buildscript {
         maven {
             url 'https://maven.aliyun.com/repository/central'
         }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
         mavenCentral()
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "net.ltgt.gradle:gradle-apt-plugin:0.18"
     }
 }
 
 subprojects {
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
+    apply plugin: 'net.ltgt.apt'
 
     group 'io.better'
-    version '1.0.0-releases'
+    version '1.0.0-RELEASES'
 
     targetCompatibility = 1.8
     sourceCompatibility = 1.8
@@ -47,6 +52,7 @@ subprojects {
         maven {
             url 'https://maven.aliyun.com/repository/central'
         }
+        
         mavenCentral()
     }
 

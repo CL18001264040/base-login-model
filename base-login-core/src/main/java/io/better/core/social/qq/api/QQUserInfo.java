@@ -1,5 +1,6 @@
 package io.better.core.social.qq.api;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -35,27 +36,32 @@ public class QQUserInfo implements Serializable {
     /**
      * 大小为30×30像素的QQ空间头像URL
      */
-    private String figureurl;
+    @JSONField(name = "figureurl")
+    private String figureUrl;
 
     /**
      * 大小为50×50像素的QQ空间头像URL
      */
-    private String figureurl_1;
+    @JSONField(name = "figureurl_1")
+    private String figureUrl1;
 
     /**
      * 大小为100×100像素的QQ空间头像URL
      */
-    private String figureurl_2;
+    @JSONField(name = "figureurl_2")
+    private String figureUrl2;
 
     /**
      * 大小为40×40像素的QQ头像URL
      */
-    private String figureurl_qq_1;
+    @JSONField(name = "figureurl_qq_1")
+    private String figureUrlQq1;
 
     /**
      * 大小为100×100像素的QQ头像URL。需要注意，不是所有的用户都拥有QQ的100x100的头像，但40x40像素则是一定会有
      */
-    private String figureurl_qq_2;
+    @JSONField(name = "figureurl_qq_2")
+    private String figureUrlQq2;
 
     /**
      * 性别
