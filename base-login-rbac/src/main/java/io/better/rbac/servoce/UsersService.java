@@ -18,10 +18,18 @@ public interface UsersService {
     /**
      * 根据用户名获取到用户信息
      *
-     * @param userName
+     * @param userName 用户名
      * @return
      */
     Users getUsersByUserName(String userName);
+
+    /**
+     * 根据电话查询用户
+     *
+     * @param cellPhone 电话
+     * @return
+     */
+    Users getUsersByCellPhone(String cellPhone);
 
     /**
      * 获取所有的用户

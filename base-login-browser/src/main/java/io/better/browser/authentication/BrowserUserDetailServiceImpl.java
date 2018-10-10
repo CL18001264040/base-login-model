@@ -52,7 +52,7 @@ public class BrowserUserDetailServiceImpl implements UserDetailsService {
         if (Objects.isNull(users)) {
             throw new UsernameNotFoundException("user info is not exists with username => " + username);
         }
-        return new User(users.getUserName(), passwordEncoder.encode(users.getPassword()),
+        return new User(users.getUsername(), passwordEncoder.encode(users.getPassword()),
                 AuthorityUtils.commaSeparatedStringToAuthorityList("ADMIN"));
     }
 }

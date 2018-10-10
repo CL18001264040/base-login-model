@@ -2,12 +2,11 @@ package io.better.core.authentication;
 
 import io.better.core.authentication.filter.SmsAuthenticationFilter;
 import io.better.core.authentication.provider.SmsAuthenticationProvider;
+import io.better.rbac.servoce.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -22,22 +21,21 @@ import org.springframework.stereotype.Component;
 @Component
 public class SmsAuthenticationSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
 
-    private UserDetailsService userDetailsService;
+    private UsersService usersService;
     private AuthenticationSuccessHandler authenticationSuccessHandler;
     private AuthenticationFailureHandler authenticationFailureHandler;
 
     /**
      * Instantiates a new Sms authentication security config.
      *
-     * @param userDetailsService           the user details service
+     * @param usersService                 the users service
      * @param authenticationSuccessHandler the authentication success handler
      * @param authenticationFailureHandler the authentication failure handler
      */
     @Autowired
-    public SmsAuthenticationSecurityConfig(@Lazy UserDetailsService userDetailsService,
-                                           AuthenticationSuccessHandler authenticationSuccessHandler,
+    public SmsAuthenticationSecurityConfig(UsersService usersService, AuthenticationSuccessHandler authenticationSuccessHandler,
                                            AuthenticationFailureHandler authenticationFailureHandler) {
-        this.userDetailsService = userDetailsService;
+        this.usersService = usersService;
         this.authenticationSuccessHandler = authenticationSuccessHandler;
         this.authenticationFailureHandler = authenticationFailureHandler;
     }
@@ -54,7 +52,7 @@ public class SmsAuthenticationSecurityConfig extends SecurityConfigurerAdapter<D
         smsAuthenticationFilter.setAuthenticationFailureHandler(authenticationFailureHandler);
 
         // 创建短信验证码的provider
-        SmsAuthenticationProvider smsAuthenticationProvider = new SmsAuthenticationProvider(userDetailsService);
+        SmsAuthenticationProvider smsAuthenticationProvider = new SmsAuthenticationProvider(usersService);
 
         // 添加到配置中
         http.authenticationProvider(smsAuthenticationProvider)

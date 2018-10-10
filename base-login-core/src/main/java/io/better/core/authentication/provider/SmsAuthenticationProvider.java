@@ -1,6 +1,8 @@
 package io.better.core.authentication.provider;
 
 import io.better.core.authentication.token.SmsAuthenticationToken;
+import io.better.rbac.model.Users;
+import io.better.rbac.servoce.UsersService;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.Authentication;
@@ -17,15 +19,15 @@ import java.util.Objects;
  */
 public class SmsAuthenticationProvider implements AuthenticationProvider {
 
-    private UserDetailsService userDetailsService;
+    private UsersService usersService;
 
     /**
      * Instantiates a new Sms authentication provider.
      *
-     * @param userDetailsService the user details service
+     * @param usersService the users service
      */
-    public SmsAuthenticationProvider(UserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
+    public SmsAuthenticationProvider(UsersService usersService) {
+        this.usersService = usersService;
     }
 
     /**
@@ -38,11 +40,11 @@ public class SmsAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         SmsAuthenticationToken smsAuthenticationToken = (SmsAuthenticationToken) authentication;
-        UserDetails user = userDetailsService.loadUserByUsername((String) smsAuthenticationToken.getPrincipal());
-        if (Objects.isNull(user)) {
+        Users users = usersService.getUsersByCellPhone((String) smsAuthenticationToken.getPrincipal());
+        if (Objects.isNull(users)) {
             throw new InternalAuthenticationServiceException("Cannot get user information with cellPhone => " + smsAuthenticationToken.getPrincipal());
         }
-        SmsAuthenticationToken verified = new SmsAuthenticationToken(user, user.getAuthorities());
+        SmsAuthenticationToken verified = new SmsAuthenticationToken(users, users.getAuthorities());
         verified.setDetails(smsAuthenticationToken.getDetails());
         return verified;
     }
