@@ -1,6 +1,7 @@
 package io.better.core.authentication.filter;
 
 import io.better.core.authentication.token.SmsAuthenticationToken;
+import io.better.core.validate.exception.ValidateCodeException;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.http.HttpMethod;
@@ -9,6 +10,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.bind.ServletRequestBindingException;
+import org.springframework.web.bind.ServletRequestUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -66,7 +69,11 @@ public class SmsAuthenticationFilter extends AbstractAuthenticationProcessingFil
      * @return the string
      */
     protected String obtainCellPhone(HttpServletRequest request) {
-        return request.getParameter(cellPhoneParameter);
+        try {
+            return ServletRequestUtils.getStringParameter(request, cellPhoneParameter);
+        } catch (ServletRequestBindingException e) {
+            throw new ValidateCodeException("get cellPhone parameter is error => " + e);
+        }
     }
 
     /**

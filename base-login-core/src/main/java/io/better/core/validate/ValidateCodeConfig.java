@@ -37,7 +37,7 @@ public class ValidateCodeConfig {
      * @return the image code generator
      */
     @Bean
-    @ConditionalOnMissingBean
+    @ConditionalOnMissingBean(ImageValidateCodeGenerator.class)
     public ImageValidateCodeGenerator imageValidateCodeGenerator() {
 
         return new ImageValidateCodeGenerator(this.securityProperties);
@@ -49,12 +49,17 @@ public class ValidateCodeConfig {
      * @return the sms code generator
      */
     @Bean
-    @ConditionalOnMissingBean
+    @ConditionalOnMissingBean(SmsValidateCodeGenerator.class)
     public SmsValidateCodeGenerator smsValidateCodeGenerator() {
 
         return new SmsValidateCodeGenerator(this.securityProperties);
     }
 
+    /**
+     * 短信默认的发送器
+     *
+     * @return
+     */
     @Bean
     @ConditionalOnMissingBean
     public SmsCodeSender smsCodeSender() {

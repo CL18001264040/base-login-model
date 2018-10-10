@@ -3,8 +3,6 @@ package io.better.core.config;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
-import io.better.core.properties.SecurityProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -16,12 +14,10 @@ import java.util.List;
  * @author better create in 2018/10/1 10:04
  */
 @Configuration
-@EnableConfigurationProperties(SecurityProperties.class)
-public class SecurityConfig extends WebMvcConfigurerAdapter {
+public class CoreMvcConfig extends WebMvcConfigurerAdapter {
 
     /**
-     * {@inheritDoc}
-     * <p>This implementation is empty.
+     * 添加自定义的json转换器
      *
      * @param converters
      */
@@ -41,13 +37,13 @@ public class SecurityConfig extends WebMvcConfigurerAdapter {
     }
 
     /**
-     * {@inheritDoc}
-     * <p>This implementation is empty.
+     * 添加自定义的资源映射
      *
      * @param registry
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        super.addResourceHandlers(registry);
         registry.addResourceHandler("/**").addResourceLocations("classpath:/");
     }
 }

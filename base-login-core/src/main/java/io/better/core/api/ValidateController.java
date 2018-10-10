@@ -50,7 +50,7 @@ public class ValidateController {
     @GetMapping(value = "/code/{type}")
     public void code(@PathVariable("type") String type, HttpServletRequest request, HttpServletResponse response) {
 
-        ValidateCodeType validateCodeType = ValidateCodeType.valueOf(type);
+        ValidateCodeType validateCodeType = ValidateCodeType.valueOf(type.toUpperCase());
         String validateType = validateCodeType.getType();
 
         ValidateCodeProcessor validateCodeProcessor = validateCodeBeanHolder.getValidateCodeProcessor(validateType);

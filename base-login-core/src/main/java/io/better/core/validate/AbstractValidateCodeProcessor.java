@@ -42,7 +42,7 @@ public abstract class AbstractValidateCodeProcessor<T extends ValidateCode> impl
     public void processor(ServletWebRequest request, String type) {
         T code = generate(request, type);
         save(request, code, type);
-        send(request, code);
+        this.send(request, code);
     }
 
     /**
@@ -97,7 +97,7 @@ public abstract class AbstractValidateCodeProcessor<T extends ValidateCode> impl
         ValidateCodeType validateCodeType = ValidateCodeType.valueOf(type.toUpperCase());
         String requestParam = validateCodeType.getRequestParam();
 
-        String validateCodeParam = null;
+        String validateCodeParam;
         try {
             validateCodeParam = ServletRequestUtils.getStringParameter(request.getRequest(), requestParam);
         } catch (ServletRequestBindingException exception) {

@@ -1,5 +1,7 @@
 package io.better.browser.config;
 
+import io.better.core.authentication.SmsAuthenticationSecurityConfig;
+import io.better.core.config.ValidateSecurityConfig;
 import io.better.core.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -25,13 +27,18 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     private final AuthenticationSuccessHandler browserAuthenticationSuccessHandler;
     private final AuthenticationFailureHandler browserAuthenticationFailedHandler;
     private final SecurityProperties securityProperties;
+    private final ValidateSecurityConfig validateSecurityConfig;
+    private final SmsAuthenticationSecurityConfig smsAuthenticationSecurityConfig;
 
     @Autowired
     public BrowserSecurityConfig(AuthenticationSuccessHandler browserAuthenticationSuccessHandler,
-                                 AuthenticationFailureHandler browserAuthenticationFailedHandler, SecurityProperties securityProperties) {
+                                 AuthenticationFailureHandler browserAuthenticationFailedHandler, SecurityProperties securityProperties,
+                                 ValidateSecurityConfig validateSecurityConfig, SmsAuthenticationSecurityConfig smsAuthenticationSecurityConfig) {
         this.browserAuthenticationSuccessHandler = browserAuthenticationSuccessHandler;
         this.browserAuthenticationFailedHandler = browserAuthenticationFailedHandler;
         this.securityProperties = securityProperties;
+        this.validateSecurityConfig = validateSecurityConfig;
+        this.smsAuthenticationSecurityConfig = smsAuthenticationSecurityConfig;
     }
 
     /**
@@ -45,6 +52,12 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
         http
+            // 引入验证码的配置
+            .apply(validateSecurityConfig)
+                .and()
+            // 引入短信登录的配置
+            .apply(smsAuthenticationSecurityConfig)
+                .and()
             .authorizeRequests()
                 .antMatchers("/api/validate/code/**", securityProperties.getBrowser().getLoginPage())
                     .permitAll()

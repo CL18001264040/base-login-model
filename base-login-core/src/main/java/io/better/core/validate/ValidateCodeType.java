@@ -16,7 +16,7 @@ public enum ValidateCodeType {
     /**
      * 图片验证码类型
      */
-    image("image") {
+    IMAGE("image") {
         @Override
         public String getRequestParam() {
             return Constant.IMG_CODE_REQ_PARAMETER.getContent();
@@ -26,7 +26,7 @@ public enum ValidateCodeType {
     /**
      * 短信验证码类型
      */
-    sms("sms") {
+    SMS("sms") {
         @Override
         public String getRequestParam() {
             return Constant.SMS_CODE_REQ_PARAMETER.getContent();
