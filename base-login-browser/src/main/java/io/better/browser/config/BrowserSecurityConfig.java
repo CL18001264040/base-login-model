@@ -43,26 +43,30 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
 
+
         http
-                .formLogin()
-                //设置自定义的登录页面
-                .loginPage("/browser/authentication/require")
-                //设置自定义的登录url
+            .authorizeRequests()
+                .antMatchers("/api/validate/code/**", securityProperties.getBrowser().getLoginPage())
+                    .permitAll()
+                .anyRequest().authenticated()
+                .and()
+            .formLogin()
+                .loginPage("/browser/authentication/require").permitAll()
                 .loginProcessingUrl("/login/form")
                 .successHandler(browserAuthenticationSuccessHandler)
                 .failureHandler(browserAuthenticationFailedHandler)
                 .and()
-                .authorizeRequests()
-                .antMatchers(
-                        "/api/validate/code/**",
-                        "/browser/authentication/require",
-                        securityProperties.getBrowser().getLoginPage()
-                ).permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .csrf().disable();
+            .logout()
+                .logoutUrl(securityProperties.getBrowser().getLogoutUrl())
+                .logoutSuccessUrl(securityProperties.getBrowser().getLogoutSuccessUrl())
+                // 配置了登录成功处理器，logoutSuccessUrl将会被忽略
+                .logoutSuccessHandler((request, response, authentication) -> {
 
-        //http.addFilterBefore(ipAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                })
+                .invalidateHttpSession(true)
+                .deleteCookies()
+                .and()
+            .csrf().disable();
     }
 
     /**

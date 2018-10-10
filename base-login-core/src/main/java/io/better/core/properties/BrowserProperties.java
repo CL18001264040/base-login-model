@@ -18,4 +18,19 @@ public class BrowserProperties {
      * 默认登录成功和失败的处理是为响应Json
      */
     private LoginType loginType = LoginType.JSON;
+
+    /**
+     * 登录成功的页面
+     */
+    private String successPage = "/index.html";
+
+    /**
+     * 退出的url
+     */
+    private String logoutUrl = "/logout";
+
+    /**
+     * 退出成功的url
+     */
+    private String logoutSuccessUrl = "/index";
 }

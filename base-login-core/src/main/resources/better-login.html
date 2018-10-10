@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-    <link rel="icon" href="https://getbootstrap.com/favicon.ico"/>
 
     <title>Default Login Page</title>
 
@@ -94,7 +93,7 @@
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <form id="baseLoginForm" method="post">
+            <form id="baseLoginForm" action="/login/form" method="POST">
                 <div class="modal-header">
                     <h5 class="modal-title" id="baseLoginModalLongTitle">Base Login</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -115,14 +114,14 @@
                         <div class="input-group">
                             <input type="text" class="form-control" name="validateCode" id="validateCode"/>
                             <div class="input-group-append" onclick="refreshValidateCode()">
-                                <img src="/api/validate/code/image?v=' + Math.random()" alt="">
+                                <img src="/api/validate/code/image" alt="">
                             </div>
                         </div>
                     </di>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" onclick="submitBaseLogin()">Base Login</button>
+                    <button type="submit" class="btn btn-primary">Base Login</button>
                 </div>
             </form>
         </div>
@@ -134,7 +133,7 @@
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <form th:action="@{/login/sms}" method="post">
+            <form action="/login/sms" method="POST">
                 <div class="modal-header">
                     <h5 class="modal-title" id="smsModalLongTitle">Sms Code</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -187,11 +186,19 @@
     function submitBaseLogin() {
         var data = $('#baseLoginForm').serialize();
         $.ajax({
-            url: '/login/forms',
+            url: '/login/form',
             type: 'POST',
             data: data,
+            async: false,
+            dataType: 'json',
             success: function (result) {
-
+                $('#baseLoginModal').modal('hide');
+                var username = result.name;
+                $('#alertMessage').text = username + ' is login success';
+                $('.alert').alert();
+            },
+            error: function (result) {
+                alert("登录失败，result => " + JSON.stringify(result));
             }
         });
     }
@@ -201,6 +208,7 @@
         $.ajax({
             url: '/api/validate/code/sms?cellPhone=' + cellPhone,
             type: 'GET',
+            async: false,
             success: function (result) {
 
             }
