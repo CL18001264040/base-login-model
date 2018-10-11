@@ -1,4 +1,4 @@
-package io.better.core.social.qq.connection;
+package io.better.core.social.qq.connect;
 
 import io.better.core.social.qq.api.QQApi;
 import org.springframework.social.connect.ApiAdapter;

@@ -1,4 +1,4 @@
-package io.better.core.social.qq.connection;
+package io.better.core.social.qq.connect;
 
 import org.springframework.social.oauth2.AccessGrant;
 import org.springframework.social.oauth2.OAuth2Template;
