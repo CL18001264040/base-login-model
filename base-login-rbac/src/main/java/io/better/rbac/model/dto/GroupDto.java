@@ -22,7 +22,7 @@ public class GroupDto implements Serializable {
 
     private String parentId;
 
-    private List<RolesDto> rolesDtos;
+    private List<RolesDto> rolesDtoList;
 
-    private List<UsersDto> usersDtos;
+    private List<UsersDto> usersDtoList;
 }
