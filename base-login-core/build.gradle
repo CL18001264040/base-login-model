@@ -8,6 +8,7 @@ dependencies {
 
     compile project(':base-login-rbac')
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+    compile('org.springframework.security.oauth:spring-security-oauth2')
     //compile('org.springframework.boot:spring-boot-starter-data-redis')
     compileOnly("org.springframework.boot:spring-boot-configuration-processor")
 }
