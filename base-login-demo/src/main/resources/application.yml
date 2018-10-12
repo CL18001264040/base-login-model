@@ -22,6 +22,7 @@ security:
 
 better:
   security:
-#    browser:
+    browser:
+      success-page: /index.html
 #      login-page: /login.html
 

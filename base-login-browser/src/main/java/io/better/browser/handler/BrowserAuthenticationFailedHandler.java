@@ -1,7 +1,11 @@
 package io.better.browser.handler;
 
+import io.better.core.properties.SecurityProperties;
+import io.better.core.support.LoginType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
@@ -15,7 +19,15 @@ import java.io.IOException;
  * @author better create in 2018/9/23 10:29
  */
 @Component
-public class BrowserAuthenticationFailedHandler implements AuthenticationFailureHandler {
+public class BrowserAuthenticationFailedHandler extends SimpleUrlAuthenticationFailureHandler {
+
+    private final SecurityProperties securityProperties;
+
+    @Autowired
+    public BrowserAuthenticationFailedHandler(SecurityProperties securityProperties) {
+        this.securityProperties = securityProperties;
+    }
+
 
     /**
      * Called when an authentication attempt fails.
@@ -28,5 +40,12 @@ public class BrowserAuthenticationFailedHandler implements AuthenticationFailure
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception)
             throws IOException, ServletException {
 
+        if (LoginType.isJson(securityProperties.getBrowser())) {
+            response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+            response.setContentType("application/json;charset=UTF-8");
+            response.getWriter().write(exception.getMessage());
+        } else {
+            super.onAuthenticationFailure(request, response, exception);
+        }
     }
 }

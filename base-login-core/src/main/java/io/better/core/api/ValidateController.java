@@ -1,12 +1,17 @@
 package io.better.core.api;
 
-import io.better.core.validate.generator.impl.ImageCodeGenerator;
-import io.better.core.validate.generator.impl.SmsCodeGenerator;
+import io.better.core.validate.ValidateCodeBeanHolder;
+import io.better.core.validate.ValidateCodeProcessor;
+import io.better.core.validate.ValidateCodeType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.ServletWebRequest;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * The type Validate controller.
@@ -18,41 +23,37 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/api/validate")
 public class ValidateController {
 
-    private final ImageCodeGenerator imageCodeGenerator;
-    private final SmsCodeGenerator smsCodeGenerator;
-
-
     /**
-     * Instantiates a new Validate controller.
-     *
-     * @param imageCodeGenerator the image code generator
-     * @param smsCodeGenerator   the sms code generator
+     * 图片验证码的session key
      */
+    public static final String IMG_CODE_SESSION_KEY = "IMG_CODE_SESSION_KEY";
+    /**
+     * The constant SMS_CODE_SESSION_KEY.
+     */
+    public static final String SMS_CODE_SESSION_KEY = "SMS_CODE_SESSION_KEY";
+
+    private ValidateCodeBeanHolder validateCodeBeanHolder;
+
     @Autowired
-    public ValidateController(final ImageCodeGenerator imageCodeGenerator, final SmsCodeGenerator smsCodeGenerator) {
-        this.imageCodeGenerator = imageCodeGenerator;
-        this.smsCodeGenerator = smsCodeGenerator;
+    public ValidateController(ValidateCodeBeanHolder validateCodeBeanHolder) {
+        this.validateCodeBeanHolder = validateCodeBeanHolder;
     }
+
 
     /**
      * Img code string.
      *
-     * @return the string
+     * @param type     the type , see {@link ValidateCodeType}
+     * @param request  the request
+     * @param response the response
      */
-    @GetMapping(value = "/code/img")
-    public String imgCode() {
+    @GetMapping(value = "/code/{type}")
+    public void code(@PathVariable("type") String type, HttpServletRequest request, HttpServletResponse response) {
 
-        return this.imageCodeGenerator.generatorCode();
-    }
+        ValidateCodeType validateCodeType = ValidateCodeType.valueOf(type.toUpperCase());
+        String validateType = validateCodeType.getType();
 
-    /**
-     * Sms code string.
-     *
-     * @return the string
-     */
-    @GetMapping(value = "/code/sms")
-    public String smsCode(@RequestParam("cellPhone") final String cellPhone) {
-
-        return this.smsCodeGenerator.generatorCode(cellPhone);
+        ValidateCodeProcessor validateCodeProcessor = validateCodeBeanHolder.getValidateCodeProcessor(validateType);
+        validateCodeProcessor.processor(new ServletWebRequest(request, response), validateType);
     }
 }

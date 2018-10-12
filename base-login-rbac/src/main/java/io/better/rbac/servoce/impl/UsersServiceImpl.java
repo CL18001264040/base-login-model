@@ -49,6 +49,25 @@ public class UsersServiceImpl implements UsersService {
     }
 
     /**
+     * 根据电话查询用户
+     *
+     * @param cellPhone 电话
+     * @return
+     */
+    @Override
+    public Users getUsersByCellPhone(String cellPhone) {
+        List<Predicate> predicates = new LinkedList<>();
+
+        return usersRepository.findOne((root, query, cb) -> {
+            if (StringUtils.isNoneBlank(cellPhone)) {
+                predicates.add(cb.equal(root.get("cellPhone"), cellPhone));
+            }
+            query.where(predicates.toArray(new Predicate[predicates.size()]));
+            return query.getRestriction();
+        });
+    }
+
+    /**
      * 获取所有的用户
      *
      * @return

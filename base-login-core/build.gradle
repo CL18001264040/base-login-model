@@ -1,6 +1,14 @@
 dependencies {
 
+    compile('com.alibaba:fastjson:1.2.51')
+    compile 'org.mapstruct:mapstruct:1.2.0.Final'
+    compile 'org.mapstruct:mapstruct-jdk8:1.2.0.Final'
+    apt 'org.mapstruct:mapstruct-processor:1.2.0.Final'
+    compile('org.springframework.social:spring-social-core:1.1.6.RELEASE')
+
     compile project(':base-login-rbac')
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+    compile('org.springframework.security.oauth:spring-security-oauth2')
+    //compile('org.springframework.boot:spring-boot-starter-data-redis')
     compileOnly("org.springframework.boot:spring-boot-configuration-processor")
 }

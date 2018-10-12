@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
+
 /**
  * The type Browser user detail service.
  *
@@ -47,7 +49,10 @@ public class BrowserUserDetailServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         Users users = usersService.getUsersByUserName(username);
-        return new User(users.getUserName(), passwordEncoder.encode(users.getPassword()),
+        if (Objects.isNull(users)) {
+            throw new UsernameNotFoundException("user info is not exists with username => " + username);
+        }
+        return new User(users.getUsername(), passwordEncoder.encode(users.getPassword()),
                 AuthorityUtils.commaSeparatedStringToAuthorityList("ADMIN"));
     }
 }

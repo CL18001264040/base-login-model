@@ -1,26 +1,22 @@
 <!DOCTYPE html>
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-CN">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-    <link rel="icon" href="https://getbootstrap.com/favicon.ico"/>
 
     <title>Default Login Page</title>
 
     <script type='text/javascript' src='webjars/jquery/3.3.1-1/jquery.min.js'></script>
     <link rel='stylesheet' href='webjars/bootstrap/4.1.3/css/bootstrap.min.css'/>
     <script type='text/javascript' src='webjars/bootstrap/4.1.3/js/bootstrap.min.js'></script>
-    <!--<script th:src="@{/static/js/popper.min.js}"></script>-->
-    <!--<script th:src="@{/static/js/holder.min.js}"></script>-->
-    <!--<link th:href="@{/css/pricing.css}" rel="stylesheet"/>-->
 </head>
 
 <body>
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-    <h5 class="my-0 mr-md-auto font-weight-normal">Security Login Page</h5>
+    <h5 class="my-0 mr-md-auto font-weight-normal">Better Default Login Page</h5>
     <nav class="my-2 my-md-0 mr-md-3">
         <a class="p-2 text-dark" href="#">OAuth2</a>
     </nav>
@@ -28,7 +24,7 @@
 </div>
 
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4">Spring Security Deafult Login Page</h1>
+    <h1 class="display-4">Better Default Login Page</h1>
     <p class="lead">登录选项: BaseLogin, 短信登录, QQ登录, 微信登录....</p>
 </div>
 
@@ -94,7 +90,7 @@
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <form th:action="@{/login/base}" method="post">
+            <form id="baseLoginForm" action="/login/form" method="POST">
                 <div class="modal-header">
                     <h5 class="modal-title" id="baseLoginModalLongTitle">Base Login</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -111,11 +107,11 @@
                         <input type="password" class="form-control" id="password" name="password"/>
                     </div>
                     <di class="form-group">
-                        <label for="validateCode" class="col-form-label">ValidateCode:</label>
+                        <label for="imgValidateCode" class="col-form-label">ValidateCode:</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="validateCode" id="validateCode"/>
+                            <input type="text" class="form-control" name="imgValidateCode" id="imgValidateCode"/>
                             <div class="input-group-append" onclick="refreshValidateCode()">
-                                <span class="input-group-text" id="resValidateCode"></span>
+                                <img src="/api/validate/code/image" alt="">
                             </div>
                         </div>
                     </di>
@@ -134,7 +130,7 @@
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <form th:action="@{/login/sms}" method="post">
+            <form action="/login/sms" method="POST">
                 <div class="modal-header">
                     <h5 class="modal-title" id="smsModalLongTitle">Sms Code</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -144,17 +140,17 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="cellPhone" class="col-form-label">CellPhone:</label>
-                        <input type="text" class="form-control" id="cellPhone"/>
+                        <input type="text" class="form-control" id="cellPhone" name="cellPhone"/>
                     </div>
 
                     <div class="form-group">
                         <label for="smsCode" class="col-form-label">SmsCode:</label>
-                        <input type="text" class="form-control" id="smsCode"/>
+                        <input type="text" class="form-control" id="smsCode" name="smsValidateCode"/>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Send Sms Code</button>
+                    <button type="button" class="btn btn-primary" onclick="sendSmsCode()">Send Sms Code</button>
                     <button type="submit" class="btn btn-primary">Sms Login</button>
                 </div>
             </form>
@@ -182,12 +178,36 @@
     }
 
     function refreshValidateCode() {
+    }
 
+    function submitBaseLogin() {
+        var data = $('#baseLoginForm').serialize();
         $.ajax({
-            url: '/api/validate/code/img',
-            type: 'GET',
+            url: '/login/form',
+            type: 'POST',
+            data: data,
+            async: false,
+            dataType: 'json',
             success: function (result) {
-                $('#resValidateCode').text(result);
+                $('#baseLoginModal').modal('hide');
+                var username = result.name;
+                $('#alertMessage').text = username + ' is login success';
+                $('.alert').alert();
+            },
+            error: function (result) {
+                alert("登录失败，result => " + JSON.stringify(result));
+            }
+        });
+    }
+
+    function sendSmsCode() {
+        var cellPhone = $('#cellPhone').val();
+        $.ajax({
+            url: '/api/validate/code/sms?cellPhone=' + cellPhone,
+            type: 'GET',
+            async: false,
+            success: function (result) {
+
             }
         });
     }

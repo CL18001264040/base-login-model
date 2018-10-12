@@ -3,6 +3,7 @@ package io.better.browser.api;
 import io.better.core.properties.SecurityProperties;
 import io.better.core.support.SimpleResponse;
 import io.better.core.support.SuffixEnum;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,7 @@ import java.util.Objects;
  */
 @RestController
 @RequestMapping(value = "/browser")
+@Slf4j
 public class BrowserController {
 
     private final SecurityProperties securityProperties;
