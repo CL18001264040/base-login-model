@@ -30,7 +30,7 @@ public abstract class AbstractSessionStrategy {
     /**
      * 是否创建session
      */
-    private Boolean createNewSession;
+    private Boolean createNewSession = Boolean.TRUE;
 
     /**
      * Instantiates a new Abstract session strategy.

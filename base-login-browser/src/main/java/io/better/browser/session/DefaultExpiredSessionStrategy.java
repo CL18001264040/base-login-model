@@ -18,6 +18,6 @@ public class DefaultExpiredSessionStrategy extends AbstractSessionStrategy imple
 
     @Override
     public void onExpiredSessionDetected(SessionInformationExpiredEvent event) throws IOException, ServletException {
-
+        sessionInvalid(event.getRequest(), event.getResponse());
     }
 }

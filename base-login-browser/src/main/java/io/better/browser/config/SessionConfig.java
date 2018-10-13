@@ -1,5 +1,6 @@
 package io.better.browser.config;
 
+import io.better.browser.handler.BrowserLogoutSuccessHandler;
 import io.better.browser.session.DefaultExpiredSessionStrategy;
 import io.better.browser.session.DefaultInvalidSessionStrategy;
 import io.better.core.properties.SecurityProperties;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.session.InvalidSessionStrategy;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 
@@ -21,6 +23,11 @@ public class SessionConfig {
 
     private final SecurityProperties securityProperties;
 
+    /**
+     * Instantiates a new Session config.
+     *
+     * @param securityProperties the security properties
+     */
     @Autowired
     public SessionConfig(SecurityProperties securityProperties) {
         this.securityProperties = securityProperties;
@@ -46,5 +53,16 @@ public class SessionConfig {
     @ConditionalOnMissingBean(SessionInformationExpiredStrategy.class)
     public SessionInformationExpiredStrategy sessionInformationExpiredStrategy() {
         return new DefaultExpiredSessionStrategy(securityProperties.getBrowser().getSessionProp().getSessionInvalidUrl());
+    }
+
+    /**
+     * Logout success handler logout success handler.
+     *
+     * @return the logout success handler
+     */
+    @Bean
+    @ConditionalOnMissingBean(LogoutSuccessHandler.class)
+    public LogoutSuccessHandler logoutSuccessHandler() {
+        return new BrowserLogoutSuccessHandler(securityProperties.getBrowser().getLogoutSuccessUrl());
     }
 }

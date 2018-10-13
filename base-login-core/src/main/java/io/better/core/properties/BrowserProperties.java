@@ -2,7 +2,6 @@ package io.better.core.properties;
 
 import io.better.core.support.LoginType;
 import lombok.Data;
-import org.hibernate.Session;
 
 /**
  * @author better create in 2018/10/1 09:57
@@ -33,7 +32,7 @@ public class BrowserProperties {
     /**
      * 退出成功的url
      */
-    private String logoutSuccessUrl = "/index";
+    private String logoutSuccessUrl = "";
 
     /**
      * session相关的配置

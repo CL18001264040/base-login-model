@@ -12,5 +12,15 @@ public class SessionProperties {
     /**
      * session失效页面
      */
-    private String sessionInvalidUrl = "";
+    private String sessionInvalidUrl = "/session/invalid";
+
+    /**
+     * Session最大数量
+     */
+    private Integer maximumSessions = 1;
+
+    /**
+     * 当session达到最大时，是否阻止新的登录
+     */
+    private Boolean maxSessionsPreventsLogin = Boolean.FALSE;
 }

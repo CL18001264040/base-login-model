@@ -19,7 +19,7 @@ public class DefaultInvalidSessionStrategy extends AbstractSessionStrategy imple
 
     @Override
     public void onInvalidSessionDetected(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
+        sessionInvalid(request,response);
     }
 
     @Override
