@@ -15,6 +15,11 @@ spring:
     show-sql: true
   thymeleaf:
     cache: false
+  redis:
+    port: 6379
+    host: localhost
+  session:
+    store-type: redis
 
 security:
   basic:

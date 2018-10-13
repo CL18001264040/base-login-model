@@ -68,7 +68,8 @@ public abstract class AbstractValidateCodeProcessor<T extends ValidateCode> impl
      */
     @Override
     public void save(ServletWebRequest request, T validateCode, String type) {
-        sessionAttributeStore.storeAttribute(request, getSessionKey(type), validateCode);
+        ValidateCode validateCodeStore = new ValidateCode(validateCode.getCode(), validateCode.getExpireTime());
+        sessionAttributeStore.storeAttribute(request, getSessionKey(type), validateCodeStore);
     }
 
     /**
