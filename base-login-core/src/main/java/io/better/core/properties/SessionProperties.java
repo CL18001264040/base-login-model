@@ -12,7 +12,7 @@ public class SessionProperties {
     /**
      * session失效页面
      */
-    private String sessionInvalidUrl = "/session/invalid";
+    private String sessionInvalidUrl = "/session-invalid";
 
     /**
      * Session最大数量
