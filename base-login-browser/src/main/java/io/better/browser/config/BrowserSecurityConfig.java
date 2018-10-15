@@ -113,8 +113,5 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
      *
      * @return the b crypt password encoder
      */
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+
 }

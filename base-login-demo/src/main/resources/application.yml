@@ -23,10 +23,13 @@ spring:
   session:
     store-type: redis
 
-
 security:
   basic:
     enabled: false
+  oauth2:
+    client:
+      client-id: better
+      client-secret: better-secret
 
 better:
   security:

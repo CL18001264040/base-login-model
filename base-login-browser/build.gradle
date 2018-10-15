@@ -3,4 +3,5 @@ dependencies {
     compile project(':base-login-core')
 
     compile('org.springframework.session:spring-session')
+    compile('org.springframework.boot:spring-boot-starter-data-redis')
 }

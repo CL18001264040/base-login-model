@@ -13,6 +13,5 @@ dependencies {
     compile project(':base-login-rbac')
     compile('org.springframework.cloud:spring-cloud-starter-oauth2')
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
-    compile('org.springframework.boot:spring-boot-starter-data-redis')
     compileOnly("org.springframework.boot:spring-boot-configuration-processor")
 }

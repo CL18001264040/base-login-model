@@ -1,4 +1,4 @@
-package io.better.browser.authentication;
+package io.better.authentication;
 
 import io.better.rbac.model.Users;
 import io.better.rbac.servoce.UsersService;
@@ -53,6 +53,6 @@ public class BrowserUserDetailServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException("user info is not exists with username => " + username);
         }
         return new User(users.getUsername(), passwordEncoder.encode(users.getPassword()),
-                AuthorityUtils.commaSeparatedStringToAuthorityList("ADMIN"));
+                AuthorityUtils.commaSeparatedStringToAuthorityList("ADMIN,ROLE_USER"));
     }
 }
