@@ -1,4 +1,4 @@
-package io.better.core.jwt.provider;
+package io.better.core.oauth2.provider;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;

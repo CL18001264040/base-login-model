@@ -26,15 +26,20 @@ spring:
 security:
   basic:
     enabled: false
-  oauth2:
-    client:
-      client-id: better
-      client-secret: better-secret
 
 better:
   security:
     validate:
       img:
         length: 4
+    oAuth2:
+      clients:
+        - client-id: better
+          secret: bettersecret
+          authorizedGrantTypes: password
+        - client-id: test
+          secret: test
+          authorizedGrantTypes: password
+
 #      login-page: /login.html
 

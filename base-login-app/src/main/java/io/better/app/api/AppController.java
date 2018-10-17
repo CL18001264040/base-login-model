@@ -27,7 +27,7 @@ import java.util.Objects;
  * @date create in 2018/9/17 下午5:04
  */
 @RestController
-@RequestMapping(value = "/api/app")
+@RequestMapping(value = "/app")
 public class AppController {
 
     private final SecurityProperties securityProperties;

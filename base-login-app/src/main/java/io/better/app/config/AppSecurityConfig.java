@@ -50,9 +50,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
             .authorizeRequests()
                 .antMatchers("/api/validate/code/**", securityProperties.getBrowser().getLoginPage(),
-                        securityProperties.getBrowser().getLogoutUrl(),
-                        securityProperties.getBrowser().getSessionProp().getSessionInvalidUrl() + ".html",
-                        securityProperties.getBrowser().getSessionProp().getSessionInvalidUrl() + ".json")
+                        securityProperties.getBrowser().getLogoutUrl(), "/me")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
