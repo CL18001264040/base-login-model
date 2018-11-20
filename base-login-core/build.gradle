@@ -1,6 +1,7 @@
 dependencies {
 
-    compile('com.alibaba:fastjson:1.2.51')
+    compile 'com.alibaba:fastjson:1.2.51'
+    compile 'io.jsonwebtoken:jjwt:0.9.1'
     compile 'org.mapstruct:mapstruct:1.2.0.Final'
     compile 'org.mapstruct:mapstruct-jdk8:1.2.0.Final'
     apt 'org.mapstruct:mapstruct-processor:1.2.0.Final'
